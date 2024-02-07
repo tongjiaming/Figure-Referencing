@@ -36,13 +36,7 @@ with open(DATA_PATH) as file:
                 candidates.append(candidate['caption'])
                 candidate_labels.append(candidate['id'])
 
-            if not isinstance(candidates, list):
-                candidates = [candidates]
             queries = [query] * len(candidates)
-
-            assert isinstance(queries, list)
-            assert isinstance(candidates, list)
-            assert len(queries) == len(candidates)
 
             results = rouge.compute(predictions=queries,
                                     references=candidates,
