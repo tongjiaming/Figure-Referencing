@@ -12,6 +12,7 @@ correct = [0, 0, 0, 0]
 with open(DATA_PATH) as file:
     for line in file:
         data = json.loads(line)
+
         if len(data['referenced_items']) <= 1:
             continue
 
