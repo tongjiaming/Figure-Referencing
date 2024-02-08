@@ -3,6 +3,7 @@ This repo is for the master thesis of figure referencing.
 
 # Json Schema
 The 'start' and 'end' in 'references' indicate the index of the sentence.
+
 The 'start' and 'end' in 'sentences' indicate the index of the paragraph.
 
 ```json
