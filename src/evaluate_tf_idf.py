@@ -12,7 +12,7 @@ with open(DATA_PATH) as file:
     for line in file:
         data = json.loads(line)
 
-        if not data['references']:
+        if len(data['referenced_items']) <= 1:
             continue
 
         queries = []
