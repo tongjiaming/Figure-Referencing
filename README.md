@@ -30,7 +30,7 @@ This repo is for the master thesis of figure referencing.
             "description": "(optional) The abstract of the paper.",
             "type": "string"
         },
-        "query_placeholders": { (All done except for position)
+        "query_placeholders": {
             "description": "The query placeholder set.",
             "type": "array",
             "items": {
