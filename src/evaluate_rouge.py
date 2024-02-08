@@ -12,6 +12,9 @@ correct = [0, 0, 0, 0]
 with open(DATA_PATH) as file:
     for line in file:
         data = json.loads(line)
+        if len(data['referenced_items']) <= 1:
+            continue
+
         for reference in data['references']:
             total = total + 1
             print('Working on sample {}'.format(total))
@@ -30,19 +33,13 @@ with open(DATA_PATH) as file:
                             break
                     break
 
-            query = sentence_text[:start] + '<mask>' + sentence_text[:end]
+            query = sentence_text[:start] + '<ref>' + sentence_text[:end]
             gt = reference['target']
             for candidate in data['referenced_items']:
                 candidates.append(candidate['caption'])
                 candidate_labels.append(candidate['id'])
 
-            if not isinstance(candidates, list):
-                candidates = [candidates]
             queries = [query] * len(candidates)
-
-            assert isinstance(queries, list)
-            assert isinstance(candidates, list)
-            assert len(queries) == len(candidates)
 
             results = rouge.compute(predictions=queries,
                                     references=candidates,
