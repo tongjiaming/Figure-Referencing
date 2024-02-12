@@ -2,7 +2,7 @@
 This repo is for the master thesis of figure referencing.
 
 # How to Use
-Replace '__init__.py' in pubmed_parser with 'src/load_data/pubmed__init__.py' before using.
+Replace '.venv\Lib\site-packages\pubmed_parser\__init__.py' with 'src/load_data/pubmed__init__.py' before using.
 
 After replacing, change filename of pubmed__init__.py to '__init__.py'
 
