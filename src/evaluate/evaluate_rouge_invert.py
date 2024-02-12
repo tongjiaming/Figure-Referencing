@@ -2,7 +2,7 @@ import evaluate
 import json
 
 
-DATA_PATH = '../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out2.json'
 rouge = evaluate.load('rouge')
 
 

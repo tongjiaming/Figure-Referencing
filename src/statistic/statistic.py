@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 
-OUTPUT_PATH = '../output/PMCOA_out.json'
+OUTPUT_PATH = '../../output/PMCOA_out.json'
 
 
 def draw(data, title):

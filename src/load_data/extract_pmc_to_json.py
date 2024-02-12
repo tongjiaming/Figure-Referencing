@@ -3,10 +3,10 @@ import lib_pubmed_oa_parser2 as pp2
 import json
 import os
 
-DATA_PATH = '../data/pmc/'
-TEST_DATA_PATH = '../data/pmc/PMC516027.xml'
-OUTPUT_PATH = '../output/PMCOA_out2.json'
-TEST_OUTPUT_PATH = '../output/PMCOA_out_test.json'
+DATA_PATH = '../../data/pmc/'
+TEST_DATA_PATH = '../../data/pmc/PMC516027.xml'
+OUTPUT_PATH = '../../output/PMCOA_out2.json'
+TEST_OUTPUT_PATH = '../../output/PMCOA_out_test.json'
 
 
 def process_paper(path, paper_id):

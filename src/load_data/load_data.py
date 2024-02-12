@@ -1,6 +1,7 @@
+"""Load json into queries, targets, candidates, candidate_labels for experiments."""
 import json
 
-DATA_PATH = '../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out2.json'
 
 
 def data_loader(data_path):

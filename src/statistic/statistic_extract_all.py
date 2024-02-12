@@ -2,8 +2,8 @@ from statistic_paper_info import extract_paper_info
 import os
 import json
 
-DATA_PATH = '../data/pmc/'
-OUTPUT_PATH = '../output/PMCOA_out.json'
+DATA_PATH = '../../data/pmc/'
+OUTPUT_PATH = '../../output/PMCOA_out.json'
 
 with open(OUTPUT_PATH, 'w') as file:  # clear old content
     file.write('')

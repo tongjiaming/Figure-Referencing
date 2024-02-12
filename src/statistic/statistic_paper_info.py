@@ -61,7 +61,7 @@ def extract_paper_info(path):
 
 def test():
 
-    path = '../data/pmc/PMC450293.xml'
+    path = '../../data/pmc/PMC450293.xml'
     paper_info = extract_paper_info(path)
     return paper_info
 

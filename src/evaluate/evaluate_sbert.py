@@ -17,7 +17,7 @@ def cosine_similarity(query, candidates):
 def main():
     model = SentenceTransformer('sentence-transformers/all-mpnet-base-v2')
 
-    DATA_PATH = '../output/PMCOA_out2.json'
+    DATA_PATH = '../../output/PMCOA_out2.json'
 
     total = 0
     correct = 0
