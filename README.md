@@ -1,6 +1,11 @@
 # Figure Referencing
 This repo is for the master thesis of figure referencing.
 
+# How to Use
+Replace '__init__.py' in pubmed_parser with 'src/load_data/pubmed__init__.py' before using.
+
+After replacing, change filename of pubmed__init__.py to '__init__.py'
+
 # Json Schema
 The 'start' and 'end' in 'references' indicate the index of the sentence.
 
@@ -25,7 +30,7 @@ The 'start' and 'end' in 'sentences' indicate the index of the paragraph.
         "paper_PMCID": {
             "description": "(optional) The PMCID of the paper.",
             "type": "string"
-        }
+        },
         "paper_title": {
             "description": "The title of the paper.",
             "type": "string"
@@ -116,3 +121,16 @@ The 'start' and 'end' in 'sentences' indicate the index of the paragraph.
    "required": ["sample_id", "paper_title", "paragraphs", "referencing_sentences", "query_placeholders", "referenced_items"]
 }
 ```
+
+# 12, Feb, 2024
+5.index optimization
+
+4.NDCG for caption -> sentence
+
+1.The entire dataset
+
+2.split into train validate test
+threshold score rather than top match
+find out the best threshold value
+
+3.sentence-bert embedding cosine-sim (done)
