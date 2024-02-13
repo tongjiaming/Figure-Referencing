@@ -123,14 +123,16 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 ```
 
 # 12, Feb, 2024
-5.index optimization
+1.index optimization
 
-4.NDCG for caption -> sentence
+2.fake referencing sentences
 
-1.The entire dataset
+3.NDCG for caption -> sentence
 
-2.split into train validate test
+4.sentence-bert embedding cosine-sim (done)
+
+5.split into train validate test
 threshold score rather than top match
 find out the best threshold value
 
-3.sentence-bert embedding cosine-sim (done)
+6.The entire dataset
