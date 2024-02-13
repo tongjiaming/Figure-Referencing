@@ -39,47 +39,88 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
             "description": "(optional) The abstract of the paper.",
             "type": "string"
         },
-        "query_placeholders": {
-            "description": "The query placeholder set.",
+        "paragraphs": {
+            "description": "The paragraph list.",
             "type": "array",
             "items": {
-                "description": "The placeholder that references a figure or table.",
+                "description": "The paragraph object.",
                 "type": "object",
                 "properties": {
-                    "placeholder_id": {
-                        "description": "The unique ID of the referencing placeholder in the paper.",
+                    "id": {
                         "type": "integer"
                     },
-                    "placeholder_label": {
-                        "description": "The label text of the referencing.",
-                        "type": "string"
-                    },
-                    "target_id": {
-                        "description": "The referenced figure or table's unique id",
-                        "type": "string"
-                    },
-                    "context_sentence": {
-                        "description": "The referencing sentence that the placeholder belongs to.",
-                        "type": "string"
-                    },
-                    "context_paragraph": {
-                        "description": "The paragraph that the placeholder belongs to.",
+                    "text": {
                         "type": "string"
                     },
                     "section": {
-                        "description": "Indicating which section the placeholder belongs to.",
-                        "type": "string"
-                    },
-                    "position": {
-                        "description": "In case some referencing sentence has more than one reference, this indicates which position the placeholder is in.",
-                        "type": "integer"
-                    },
-                    "target_type": {
-                        "description": "The type of the referenced target, one of the following values: table or figure.",
                         "type": "string"
                     }
-                },
-                "required": ["placeholder_id", "placeholder_label", "target_id", "context_sentence", "context_paragraphs", "section", "position"]
+                }
+            }
+        },
+        "sentences": {
+            "description": "The sentence list.",
+            "type": "array",
+            "items": {
+                "description": "The sentence object.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "paragraph": {
+                        "description": "The ID of the paragraph which the sentence belongs to",
+                        "type": "integer"
+                    },
+                    "start": {
+                        "description": "Starting position of the sentence in the paragraph.",
+                        "type": "integer"
+                    },
+                    "end": {
+                        "description": "End position of the sentence in the paragraph.",
+                        "type": "integer"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "has_ref": {
+                        "description": "If the sentence is referencing something.",
+                        "type": "bool"
+                    }
+                }
+            }
+        },
+        "references": {
+            "description": "The reference list.",
+            "type": "array",
+            "items": {
+                "description": "The reference object.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "The unique id for all data samples, different from the IDs of paragraphs or sentences which are paper-unique only.",
+                        "type": "string"
+                    },
+                    "sentence": {
+                        "description": "The ID of the sentence which the reference belongs to",
+                        "type": "integer"
+                    },
+                    "start": {
+                        "description": "Starting position of the reference in the sentence.",
+                        "type": "integer"
+                    },
+                    "end": {
+                        "description": "End position of the reference in the sentence.",
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string"
+                    },
+                    "target": {
+                        "description": "The ID of the referenced target.",
+                        "type": "string"
+                    }
+                }
             }
         },
         "referenced_items": {
