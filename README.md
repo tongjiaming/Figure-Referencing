@@ -10,7 +10,7 @@ After replacing, change filename of `pubmed__init__.py` to `__init__.py` and unc
 ## Prepare Data
 Run the `load_data/extract_pmc_to_json.py` after putting raw data at the right place.
 
-When loading data, you can set fake_ref_ration to control the number of fake refs.
+When loading data, you can set `fake_ref_ratio` to control the number of fake refs.
 
 Fake refs are refs that are targeting nothing.
 
