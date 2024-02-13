@@ -19,8 +19,8 @@ The 'start' and 'end' in 'sentences' indicate the index of the paragraph.
     "description": "A data sample for figure referencing task.",
     "type": "object",
     "properties":{
-        "sample_id": {
-            "description": "The unique ID for this sample.",
+        "paper_id": {
+            "description": "The unique ID for this paper.",
             "type": "integer"
         },
         "paper_URL": {
