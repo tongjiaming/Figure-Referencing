@@ -2,14 +2,14 @@
 This repo is for the master thesis of figure referencing.
 
 # How to Use
-Replace '.venv\Lib\site-packages\pubmed_parser\__init__.py' with 'src/load_data/pubmed__init__.py' before using.
+Replace `.venv\Lib\site-packages\pubmed_parser\__init__.py` with `src/load_data/pubmed__init__.py` before using.
 
-After replacing, change filename of pubmed__init__.py to '__init__.py'
+After replacing, change filename of pubmed__init__.py to `__init__.py`
 
 # Json Schema
-The 'start' and 'end' in 'references' indicate the index of the sentence.
+The `start` and `end` in `references` indicate the index of the sentence.
 
-The 'start' and 'end' in 'sentences' indicate the index of the paragraph.
+The `start` and `end` in `sentences` indicate the index of the paragraph.
 
 ```json
 {
