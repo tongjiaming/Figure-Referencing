@@ -18,7 +18,8 @@ def process_paper(path, paper_id):
     abstract = dict_out["abstract"]
 
     # paragraphs, sentences, references, referenced_items = pp2.parse_pubmed_paragraph2(path, paper_id)
-    paragraphs, sentences, references, referenced_items = pp2.parse_pubmed_paragraph3(path, paper_id)
+    paragraphs, sentences, references, referenced_items = (
+        pp2.parse_pubmed_paragraph3(path, paper_id, with_fake_refs=True))
 
     out_figure = pp2.parse_pubmed_caption2(path)
     out_table = pp2.parse_pubmed_table2(path)
@@ -74,5 +75,5 @@ def main():
 
 
 if __name__ == "__main__":
-    my_test()
+    # my_test()
     main()

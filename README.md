@@ -2,9 +2,20 @@
 This repo is for the master thesis of figure referencing.
 
 # How to Use
-Replace `.venv\Lib\site-packages\pubmed_parser\__init__.py` with `src/load_data/pubmed__init__.py` before using.
+## Make sure the pubmed_parser works
+Replace `.venv/Lib/site-packages/pubmed_parser/__init__.py` with `src/load_data/pubmed__init__.py` before using.
 
-After replacing, change filename of `pubmed__init__.py` to `__init__.py`
+After replacing, change filename of `pubmed__init__.py` to `__init__.py` and uncomment the content.
+
+## Prepare Data
+Run the `load_data/extract_pmc_to_json.py` after putting raw data at the right place.
+
+When loading data, you can set fake_ref_ration to control the number of fake refs.
+
+Fake refs are refs that are targeting nothing.
+
+## Evaluate
+Run script in `src/evaluate/` such as `evaluate_rouge.py`
 
 # Json Schema
 The `start` and `end` in `references` indicate the index of the sentence.

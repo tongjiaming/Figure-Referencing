@@ -56,7 +56,7 @@ def main():
     loader = data_loader(DATA_PATH)
     while True:
         try:
-            queries, targets, candidates, candidate_labels = next(loader)
+            next(loader)
             total = total + 1
             print(total)
         except StopIteration:
