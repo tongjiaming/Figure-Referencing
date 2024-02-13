@@ -163,7 +163,8 @@ def parse_pubmed_paragraph3(path, paper_id):
                         "paragraph": paragraph_id,
                         "start": start,
                         "end": end,
-                        "text": raw_sentence  # Temp var for reference find
+                        "text": raw_sentence,  # Temp var for reference find
+                        "has_ref": False
                     }
                     paragraph_sentences.append(sentence)
                     global_sentence_id = global_sentence_id + 1

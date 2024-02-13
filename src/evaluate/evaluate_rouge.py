@@ -1,5 +1,5 @@
 import evaluate
-from load_data import data_loader
+from evaluate_load_data import data_loader
 import time
 
 
