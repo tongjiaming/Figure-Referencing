@@ -189,6 +189,8 @@ find out the best threshold value
 
 6.The entire dataset
 
+7.play with GPT
+
 # Results
 ## Baseline: sentence -> caption
 | Approach  | Num of Samples |      Precision      |
@@ -201,13 +203,14 @@ find out the best threshold value
 
 
 ## Baseline: caption -> sentence
-| Approach  | Num of Samples |      Precision      |
-|:---------:|:--------------:|:-------------------:|
-|  rouge1   |      4364      | 0.41796516956920254 |
-|  rouge2   |      4364      | 0.42231897341888175 |
-|  rougeL   |      4364      | 0.4129239230064161  |
-| rougeLsum |      4364      | 0.4129239230064161  |
-|  TF-IDF   |      4364      | 0.4711274060494959  |
+| Approach  | Num of Samples |      Precision      |     Precision      |
+|:---------:|:--------------:|:-------------------:|:------------------:|
+|  rouge1   |      4364      | 0.41796516956920254 | 0.6431754482431424 |
+|  rouge2   |      4364      | 0.42231897341888175 | 0.6435906255214052 |
+|  rougeL   |      4364      | 0.4129239230064161  | 0.6413681886087096 |
+| rougeLsum |      4364      | 0.4129239230064161  | 0.6414643042504324 |
+|  TF-IDF   |      4364      | 0.4711274060494959  | 0.6637401154137255 |
+
 
 ## With Fake Refs of ratio 0.5
 | Approach  | Num of Samples |      Precision      |

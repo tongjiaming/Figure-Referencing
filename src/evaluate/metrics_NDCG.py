@@ -20,7 +20,9 @@ def ndcg(scores):
 
 
 def similarities_to_ndcg(similarities, gt):
+    gt = [int(item[-3:]) for item in gt]
     sorted_similarities = sorted(range(len(similarities)), key=lambda i: similarities[i], reverse=True)
     scores = [1 if item in gt else 0 for item in sorted_similarities]
+    ndcg_scores = ndcg(scores)
 
-    return ndcg(scores)
+    return ndcg_scores

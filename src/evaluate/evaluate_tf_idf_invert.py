@@ -1,12 +1,14 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import json
+from metrics_NDCG import similarities_to_ndcg
 
 
 DATA_PATH = '../../output/PMCOA_out2.json'
 
 total = 0
 correct = 0
+ndcg_acc = 0
 
 with open(DATA_PATH) as file:
     for line in file:
@@ -59,5 +61,9 @@ with open(DATA_PATH) as file:
 
             correct = correct + (prediction in gt)
 
-    print('Total number of samples: {}'.format(total))
-    print('Precision Using TF-IDF: {}'.format(correct / total))
+            ndcg = similarities_to_ndcg(similarities[0], gt)
+            ndcg_acc = ndcg_acc + ndcg
+
+print('Total number of samples: {}'.format(total))
+print('Precision Using TF-IDF: {}'.format(correct / total))
+print('NDCG Using TF-IDF: {}'.format(ndcg_acc / total))
