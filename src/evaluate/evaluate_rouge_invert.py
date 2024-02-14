@@ -1,5 +1,6 @@
 import evaluate
 import json
+from metrics_NDCG import similarities_to_ndcg
 
 
 DATA_PATH = '../../output/PMCOA_out2.json'
@@ -8,6 +9,7 @@ rouge = evaluate.load('rouge')
 
 total = 0
 correct = [0, 0, 0, 0]
+ndcg = [0, 0, 0, 0]
 
 with open(DATA_PATH) as file:
     for line in file:
@@ -52,6 +54,16 @@ with open(DATA_PATH) as file:
             rougeL = results["rougeL"]
             rougeLsum = results["rougeLsum"]
 
+            ndcg_rouge1 = similarities_to_ndcg(rouge1, gt)
+            ndcg_rouge2 = similarities_to_ndcg(rouge2, gt)
+            ndcg_rougeL = similarities_to_ndcg(rougeL, gt)
+            ndcg_rougeLsum = similarities_to_ndcg(rougeLsum, gt)
+
+            ndcg[0] = ndcg[0] + ndcg_rouge1
+            ndcg[1] = ndcg[1] + ndcg_rouge2
+            ndcg[2] = ndcg[2] + ndcg_rougeL
+            ndcg[3] = ndcg[3] + ndcg_rougeLsum
+
             prediction_rouge1 = candidate_ids[rouge1.index(max(rouge1))]
             prediction_rouge2 = candidate_ids[rouge2.index(max(rouge2))]
             prediction_rougeL = candidate_ids[rougeL.index(max(rougeL))]
@@ -67,3 +79,8 @@ print('Precision Using rouge1: {}'.format(correct[0] / total))
 print('Precision Using rouge2: {}'.format(correct[1] / total))
 print('Precision Using rougeL: {}'.format(correct[2] / total))
 print('Precision Using rougeLsum: {}'.format(correct[3] / total))
+print('/n')
+print('NDCG Using rouge1: {}'.format(ndcg[0] / total))
+print('NDCG Using rouge2: {}'.format(ndcg[1] / total))
+print('NDCG Using rougeL: {}'.format(ndcg[2] / total))
+print('NDCG Using rougeLsum: {}'.format(ndcg[3] / total))
