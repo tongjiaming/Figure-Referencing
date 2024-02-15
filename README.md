@@ -179,8 +179,8 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 - [x] fake referencing sentences
 - [x] NDCG for caption -> sentence
 - [x] sentence-bert embedding cosine-sim
-- [ ] split into train validate test
-- [ ] threshold score rather than top match
+- [x] split into train validate test (manually)
+- [x] threshold score rather than top match
 find out the best threshold value
 - [ ] The entire dataset
 - [ ] play with GPT
