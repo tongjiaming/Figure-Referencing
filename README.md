@@ -197,7 +197,7 @@ find out the best threshold value
 
 
 ## Baseline: caption -> sentence
-| Approach  | Num of Samples |      Precision      |     Precision      |
+| Approach  | Num of Samples |      Precision      |        NDCG        |
 |:---------:|:--------------:|:-------------------:|:------------------:|
 |  rouge1   |      4364      | 0.41796516956920254 | 0.6431754482431424 |
 |  rouge2   |      4364      | 0.42231897341888175 | 0.6435906255214052 |
@@ -213,3 +213,7 @@ find out the best threshold value
 |  rouge2   |     26046      | 0.18993319511633264 |
 |  rougeL   |     26046      | 0.16758811333794058 |
 | rougeLsum |     26046      | 0.1680488366735775  |
+
+
+imrad
+filter sections
