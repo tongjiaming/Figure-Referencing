@@ -175,21 +175,15 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 ```
 
 # 12, Feb, 2024
-1.index optimization (done)
-
-2.fake referencing sentences (done)
-
-3.NDCG for caption -> sentence
-
-4.sentence-bert embedding cosine-sim (done)
-
-5.split into train validate test
-threshold score rather than top match
+- [x] index optimization
+- [x] fake referencing sentences
+- [x] NDCG for caption -> sentence
+- [x] sentence-bert embedding cosine-sim
+- [ ] split into train validate test
+- [ ] threshold score rather than top match
 find out the best threshold value
-
-6.The entire dataset
-
-7.play with GPT
+- [ ] The entire dataset
+- [ ] play with GPT
 
 # Results
 ## Baseline: sentence -> caption
