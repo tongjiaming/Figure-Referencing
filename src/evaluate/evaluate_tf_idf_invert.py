@@ -4,7 +4,7 @@ import json
 from metrics_NDCG import similarities_to_ndcg
 
 
-DATA_PATH = '../../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out.json'
 
 total = 0
 correct = 0

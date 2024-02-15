@@ -4,7 +4,7 @@ import time
 
 
 start_time = time.time()
-DATA_PATH = '../../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out.json'
 rouge = evaluate.load('rouge')
 
 total = 0

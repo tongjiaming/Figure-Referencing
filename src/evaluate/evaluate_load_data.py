@@ -1,7 +1,7 @@
 """Load json into queries, targets, candidates, candidate_labels for experiments."""
 import json
 
-DATA_PATH = '../../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out.json'
 
 
 def data_loader(data_path):
@@ -26,14 +26,6 @@ def data_loader(data_path):
                 sentence = data['sentences'][sentence_id]
                 paragraph = data['paragraphs'][sentence['paragraph']]
                 sentence_text = paragraph['text'][sentence['start']:sentence['end']]
-
-                # for sentence in data['sentences']:
-                #     if sentence_id == sentence['id']:
-                #         for paragraph in data['paragraphs']:
-                #             if paragraph['id'] == sentence['paragraph']:
-                #                 sentence_text = paragraph['text'][sentence['start']:sentence['end']]
-                #                 break
-                #         break
 
                 query = sentence_text[:start] + '<ref>' + sentence_text[:end]
                 queries.append(query)

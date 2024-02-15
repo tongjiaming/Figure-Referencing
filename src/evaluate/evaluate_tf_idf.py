@@ -3,7 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import json
 
 
-DATA_PATH = '../../output/PMCOA_out2.json'
+DATA_PATH = '../../output/PMCOA_out.json'
 
 total = 0
 correct = 0

@@ -5,8 +5,8 @@ import os
 
 DATA_PATH = '../../data/pmc/'
 TEST_DATA_PATH = '../../data/pmc/PMC516027.xml'
-OUTPUT_PATH = '../../output/PMCOA_out2.json'
-TEST_OUTPUT_PATH = '../../output/PMCOA_out_test.json'
+OUTPUT_PATH = '../../output/PMCOA_out.json'
+TEST_OUTPUT_PATH = '../../output/PMCOA_extract_test.json'
 
 
 def process_paper(path, paper_id):
