@@ -17,7 +17,6 @@ def process_paper(path, paper_id):
     pmcid = dict_out["pmc"]
     abstract = dict_out["abstract"]
 
-    # paragraphs, sentences, references, referenced_items = pp2.parse_pubmed_paragraph2(path, paper_id)
     paragraphs, sentences, references, referenced_items = (
         pp2.parse_pubmed_paragraph3(path, paper_id, with_fake_refs=True))
 

@@ -215,5 +215,14 @@ find out the best threshold value
 | rougeLsum |     26046      | 0.1680488366735775  |
 
 
-imrad
-filter sections
+
+when finding fake refs, only take refs from sections have no ref. (imrad) (Done)
+
+show some examples of the results
+
+Bm25 as new baseline
+galactica
+s2orc
+arxiv
+
+True negative

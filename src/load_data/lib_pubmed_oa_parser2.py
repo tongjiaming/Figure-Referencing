@@ -120,7 +120,7 @@ def parse_pubmed_paragraph3(path, paper_id, with_fake_refs=False, fake_refs_rati
     """
     A new version of the parser that parse a single paper and return the parsed information.
     INPUT:
-        with_fake_refs: if we want refs without any target.
+        with_fake_refs: if we want refs without any target. Fake refs are sentences in the paragraph without any refs.
         fake_refs_ratio: the ratio of fake refs in all refs.
     RETURN: paragraphs, sentences, references, referenced_items
     """
@@ -141,6 +141,7 @@ def parse_pubmed_paragraph3(path, paper_id, with_fake_refs=False, fake_refs_rati
     for paragraph_id, raw_paragraph in enumerate(raw_paragraphs):
         paragraph_text = stringify_children(raw_paragraph)
         section = raw_paragraph.find("../title")
+        paragraph_has_ref = False
 
         if section is not None:
             section = stringify_children(section).strip()
@@ -168,11 +169,10 @@ def parse_pubmed_paragraph3(path, paper_id, with_fake_refs=False, fake_refs_rati
                 "start": start,
                 "end": end,
                 "text": raw_sentence,  # Temp var for reference find
-                "has_ref": False
+                "fake_ref_candidate": True
             }
             paragraph_sentences.append(sentence)
             global_sentence_id = global_sentence_id + 1
-        sentences = sentences + paragraph_sentences
 
         available_references = []
         for raw_reference in raw_paragraph.getchildren():
@@ -180,6 +180,12 @@ def parse_pubmed_paragraph3(path, paper_id, with_fake_refs=False, fake_refs_rati
                 if raw_reference.attrib["ref-type"] in ['fig', 'table']:
                     if raw_reference.text is not None:
                         available_references.append(raw_reference)
+                        paragraph_has_ref = True
+
+        if paragraph_has_ref:
+            for sentence in paragraph_sentences:
+                sentence["fake_ref_candidate"] = False
+        sentences = sentences + paragraph_sentences
 
         # loop references
         if len(available_references) > 1000:
@@ -235,7 +241,7 @@ def parse_pubmed_paragraph3(path, paper_id, with_fake_refs=False, fake_refs_rati
         random.seed(42)
 
         num_fake_queries = round(fake_refs_ratio / (1 - fake_refs_ratio) * len(references))
-        valid_sentences = [sentence for sentence in sentences if not sentence['has_ref']]
+        valid_sentences = [sentence for sentence in sentences if sentence['fake_ref_candidate']]
         selected_sentences = random.sample(valid_sentences, min(num_fake_queries, len(valid_sentences)))
 
         for sentence in selected_sentences:
