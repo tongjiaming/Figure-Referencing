@@ -221,7 +221,7 @@ when finding fake refs, only take refs from sections have no ref. (imrad) (Done)
 show some examples of the results
 
 Bm25 as new baseline
-galactica
+galactica model
 s2orc
 arxiv
 

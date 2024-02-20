@@ -73,7 +73,6 @@ def visualize(x, y1, y2):
 
 
 def evaluate_all():
-    start_time = time.time()
     DATA_PATH = '../../output/PMCOA_out.json'
     total, precision = run_rouge(DATA_PATH)
 
