@@ -2,7 +2,6 @@ from evaluate_load_data import data_loader
 from rank_bm25 import BM25Okapi
 import time
 
-# TODO: How to calculate precision and recall?
 # TODO: Why negative BM25 score?
 
 
@@ -12,8 +11,6 @@ def run_pm25(data_path, threshold=-1):
     fp = 0
     tn = 0
     fn = 0
-
-    min_score = 0  #dbg
 
     loader = data_loader(data_path)
     while True:
@@ -25,18 +22,16 @@ def run_pm25(data_path, threshold=-1):
             for query, target in zip(queries, targets):
                 total = total + 1
                 print('Working on sample {}'.format(total))
-                scores = bm25.get_scores(query)
+                scores = bm25.get_scores(query.split(' '))
                 scores = list(scores)
+                normalized_scores = [(x - min(scores)) / (max(scores) - min(scores)) for x in scores]
 
-                if min(scores) < min_score:
-                    min_score = min(scores)
-
-                if max(scores) < threshold:
+                if max(normalized_scores) < threshold:
                     prediction = "None"
                     tn = tn + (target == prediction)
-                    fn = fn + (target != prediction)
+                    fn = fn + (target != "None")
                 else:
-                    prediction = candidate_labels[scores.index(max(scores))]
+                    prediction = candidate_labels[normalized_scores.index(max(normalized_scores))]
                     tp = tp + (target == prediction)
                     fp = fp + (target != prediction)
 

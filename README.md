@@ -42,6 +42,14 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
             "description": "(optional) The PMCID of the paper.",
             "type": "string"
         },
+        "paper_s2orc_id": {
+            "description": "(optional) The s2orc_ID of the paper.",
+            "type": "string"
+        },
+        "paper_year": {
+            "description": "(optional) The publication year of the paper.",
+            "type": "integer"
+        },
         "paper_title": {
             "description": "The title of the paper.",
             "type": "string"
@@ -213,17 +221,21 @@ find out the best threshold value
 |  rouge2   |     26046      | 0.18993319511633264 |
 |  rougeL   |     26046      | 0.16758811333794058 |
 | rougeLsum |     26046      | 0.1680488366735775  |
+|  TF-IDF   |     26046      | 0.22460262612301313 |
+|   BM25    |     26046      | 0.20763264992705213 |
 
 
-
-when finding fake refs, only take refs from sections have no ref. (imrad) (Done)
-
+# 22, Feb, 2024
+- [x] when finding fake refs, only take refs from sections have no ref.
 show some examples of the results
+- [x] Bm25 as new baseline (some negative scores)
+- [x] S2ORC
+- [ ] Precision and Recall (MultiClass)
+- [ ] galactica model
+- [ ] arxiv
+- [x] play with GPT
+- [x] publication year for the extracted data
 
-Bm25 as new baseline (problem)
-True negative
 
-galactica model
-s2orc 
-arxiv
+
 

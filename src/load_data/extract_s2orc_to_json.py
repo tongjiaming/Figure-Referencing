@@ -2,7 +2,21 @@ import json
 from sentence_splitter import split_text_into_sentences
 
 
-def extract_s2orc(data_path, out_path, n=-1):
+def extract_s2orc_year(data_path, output_path):
+    year_dict = dict()
+    with open(data_path) as file, open(output_path, 'w') as file2:
+        for line in file:
+            data_object = json.loads(line)
+            year_dict[data_object['paper_id']] = data_object['year']
+
+        file2.write(json.dumps(year_dict) + '\n')
+
+
+def extract_s2orc(data_path, out_path, year_dict_path, n=-1):
+    with open(year_dict_path) as file:
+        line = file.readline()
+        year_dict = json.loads(line)
+
     with open(data_path) as file, open(out_path, 'w') as file2:
         paper_id = 0
         while paper_id != n:
@@ -25,6 +39,8 @@ def extract_s2orc(data_path, out_path, n=-1):
             title = ''
             if json_object['abstract']:
                 abstract = json_object['abstract'][0]['text']
+
+            paper_year = year_dict[s2orcid]
 
             paragraphs = []
             paragraph_id = 0
@@ -91,6 +107,7 @@ def extract_s2orc(data_path, out_path, n=-1):
                 "paper_URL": paper_URL,
                 "paper_PMCID": pmcid,
                 "paper_s2orc_id": s2orcid,
+                "paper_year": paper_year,
                 "paper_title": title,
                 "paper_abstract": abstract,
                 "paragraphs": paragraphs,
@@ -106,7 +123,11 @@ def extract_s2orc(data_path, out_path, n=-1):
 def main():
     DATA_PATH = '../../data/S2ORC/pdf_parses_0.jsonl'
     OUT_DATA_PATH = '../../output/S2ORC/s2orc_out.json'
-    extract_s2orc(DATA_PATH, OUT_DATA_PATH, n=100)
+    META_DATA_PATH = '../../data/S2ORC/metadata_0.jsonl'
+    YEAR_DICT_PATH = '../../output/S2ORC/year_dict.json'
+
+    extract_s2orc_year(META_DATA_PATH, YEAR_DICT_PATH)
+    extract_s2orc(DATA_PATH, OUT_DATA_PATH, YEAR_DICT_PATH, n=100)
 
 
 if __name__ == "__main__":
