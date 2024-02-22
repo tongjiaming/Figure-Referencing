@@ -2,8 +2,6 @@ from evaluate_load_data import data_loader
 from rank_bm25 import BM25Okapi
 import time
 
-# TODO: Why negative BM25 score?
-
 
 def run_pm25(data_path, threshold=-1):
     total = 0
