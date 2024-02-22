@@ -220,9 +220,10 @@ when finding fake refs, only take refs from sections have no ref. (imrad) (Done)
 
 show some examples of the results
 
-Bm25 as new baseline
+Bm25 as new baseline (problem)
+True negative
+
 galactica model
-s2orc
+s2orc 
 arxiv
 
-True negative
