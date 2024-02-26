@@ -16,7 +16,7 @@ def process_paper(path, paper_id):
     title = dict_out["full_title"]
     pmcid = dict_out["pmc"]
     abstract = dict_out["abstract"]
-    paper_year = dict_out["publication_year"]
+    paper_day, paper_month, paper_year = dict_out["publication_date"].split('-')
 
     paragraphs, sentences, references, referenced_items = (
         pp2.parse_pubmed_paragraph3(path, paper_id, with_fake_refs=True))
@@ -41,6 +41,8 @@ def process_paper(path, paper_id):
         "paper_URL": paper_URL,
         "paper_PMCID": pmcid,
         "paper_year": paper_year,
+        "paper_month": paper_month,
+        "paper_day": paper_day,
         "paper_title": title,
         "paper_abstract": abstract,
         "paragraphs": paragraphs,

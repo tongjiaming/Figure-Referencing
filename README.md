@@ -50,6 +50,14 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
             "description": "(optional) The publication year of the paper.",
             "type": "integer"
         },
+        "paper_month": {
+            "description": "(optional) The publication month of the paper.",
+            "type": "integer"
+        },
+        "paper_day": {
+            "description": "(optional) The publication day of the paper.",
+            "type": "integer"
+        },
         "paper_title": {
             "description": "The title of the paper.",
             "type": "string"

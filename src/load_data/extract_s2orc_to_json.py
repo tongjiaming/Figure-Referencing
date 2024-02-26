@@ -2,9 +2,9 @@ import json
 from sentence_splitter import split_text_into_sentences
 
 
-def extract_s2orc_year(data_path, output_path):
+def extract_s2orc_year(meta_data_path, output_path):
     year_dict = dict()
-    with open(data_path) as file, open(output_path, 'w') as file2:
+    with open(meta_data_path) as file, open(output_path, 'w') as file2:
         for line in file:
             data_object = json.loads(line)
             year_dict[data_object['paper_id']] = data_object['year']
@@ -108,6 +108,8 @@ def extract_s2orc(data_path, out_path, year_dict_path, n=-1):
                 "paper_PMCID": pmcid,
                 "paper_s2orc_id": s2orcid,
                 "paper_year": paper_year,
+                "paper_month": '',
+                "paper_day": '',
                 "paper_title": title,
                 "paper_abstract": abstract,
                 "paragraphs": paragraphs,
