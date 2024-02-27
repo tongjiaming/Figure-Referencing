@@ -2,20 +2,23 @@ import json
 from sentence_splitter import split_text_into_sentences
 
 
-def extract_s2orc_year(meta_data_path, output_path):
-    year_dict = dict()
-    with open(meta_data_path) as file, open(output_path, 'w') as file2:
+def extract_s2orc_meta(meta_data_path, output_path):
+    meta_dict = dict()
+    with (open(meta_data_path) as file, open(output_path, 'w') as file2):
         for line in file:
             data_object = json.loads(line)
-            year_dict[data_object['paper_id']] = data_object['year']
+            meta_dict[data_object['paper_id']] = {
+                'year': data_object['year'],
+                'title': data_object['title']
+            }
 
-        file2.write(json.dumps(year_dict) + '\n')
+        file2.write(json.dumps(meta_dict) + '\n')
 
 
-def extract_s2orc(data_path, out_path, year_dict_path, n=-1):
-    with open(year_dict_path) as file:
+def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
+    with open(meta_dict_path) as file:
         line = file.readline()
-        year_dict = json.loads(line)
+        meta_dict = json.loads(line)
 
     with open(data_path) as file, open(out_path, 'w') as file2:
         paper_id = 0
@@ -36,11 +39,12 @@ def extract_s2orc(data_path, out_path, year_dict_path, n=-1):
             paper_URL = ''
             pmcid = ''
             s2orcid = json_object['paper_id']
-            title = ''
+
             if json_object['abstract']:
                 abstract = json_object['abstract'][0]['text']
 
-            paper_year = year_dict[s2orcid]
+            paper_year = meta_dict[s2orcid]['year']
+            title = meta_dict[s2orcid]['title']
 
             paragraphs = []
             paragraph_id = 0
@@ -126,10 +130,10 @@ def main():
     DATA_PATH = '../../data/S2ORC/pdf_parses_0.jsonl'
     OUT_DATA_PATH = '../../output/S2ORC/s2orc_out.json'
     META_DATA_PATH = '../../data/S2ORC/metadata_0.jsonl'
-    YEAR_DICT_PATH = '../../output/S2ORC/year_dict.json'
+    META_DICT_PATH = '../../output/S2ORC/meta_dict.json'
 
-    extract_s2orc_year(META_DATA_PATH, YEAR_DICT_PATH)
-    extract_s2orc(DATA_PATH, OUT_DATA_PATH, YEAR_DICT_PATH, n=100)
+    # extract_s2orc_meta(META_DATA_PATH, META_DICT_PATH)
+    extract_s2orc(DATA_PATH, OUT_DATA_PATH, META_DICT_PATH, n=100)
 
 
 if __name__ == "__main__":
