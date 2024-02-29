@@ -10,7 +10,9 @@ def visualize(x, y1, y2, title='', x_label='', y_label='', y1_label='', y2_label
     plt.xlabel(x_label)
     plt.xlabel(y_label)
 
+    plt.savefig('1.png')
     plt.show()
+
 
 
 def find_threshold(data_path, evaluate_fun, num_thresholds=11):

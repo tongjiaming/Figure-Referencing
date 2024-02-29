@@ -62,7 +62,7 @@ def run_pm25(data_path, threshold=0):
 
 
 def evaluate_all(data_path, threshold=0):
-    total, recall, precision = run_pm25(data_path, threshold)
+    total, precision, recall = run_pm25(data_path, threshold)
 
     print('Total number of samples: {}'.format(total))
     print('Precision Using BM25: {}'.format(precision))

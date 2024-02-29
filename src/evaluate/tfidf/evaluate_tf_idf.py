@@ -28,7 +28,7 @@ def run_tf_idf(data_path, threshold=0):
 
             for query, target in zip(queries, targets):
                 total = total + 1
-                print('Working on sample {}'.format(total))
+                # print('Working on sample {}'.format(total))
 
                 query_tfidf = tfidf_vectorizer.transform([query])
                 similarities = cosine_similarity(query_tfidf, tfidf_matrix[len(queries):])
@@ -64,7 +64,7 @@ def run_tf_idf(data_path, threshold=0):
 
 
 def evaluate_all(data_path, threshold=0):
-    total, recall, precision = run_tf_idf(data_path, threshold)
+    total, precision, recall = run_tf_idf(data_path, threshold)
 
     print('Total number of samples: {}'.format(total))
     print('Precision Using TF_IDF: {}'.format(precision))
