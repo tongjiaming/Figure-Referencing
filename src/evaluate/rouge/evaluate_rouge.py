@@ -88,8 +88,8 @@ def evaluate_all():
 
 def main():
     start_time = time.time()
-    # find_threshold(run_rouge)
-    evaluate_all()
+    find_threshold(run_rouge, run_rouge)
+    # evaluate_all()
     print("Finished in {} seconds".format(time.time() - start_time))
 
 

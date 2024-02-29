@@ -246,6 +246,11 @@ show some examples of the results
 - [x] publication year for the extracted data
 
 
+# 22, Feb, 2024
+- [x] Explore Arxiv, script for downloading 'tex.tar's of arxiv papers done.
+- [x] Month information
+- [x] Month information
+
 
 
 Fixed a bug may cause the referencing sentence not complete, Modules using data_loader will be affected and the results should be updated.
