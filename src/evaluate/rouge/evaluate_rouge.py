@@ -75,10 +75,8 @@ def run_rouge(data_path, threshold=0):
     return total, precisions, recalls
 
 
-def evaluate_all():
-    DATA_PATH = '../../../output/PMCOA_out.json'
-    total, precisions, recalls = run_rouge(DATA_PATH)
-
+def evaluate_all(data_path):
+    total, precisions, recalls = run_rouge(data_path)
     print('Total number of samples: {}'.format(total))
     print('Precision Using rouge1: {}'.format(precisions[0]))
     print('Precision Using rouge2: {}'.format(precisions[1]))
@@ -88,8 +86,9 @@ def evaluate_all():
 
 def main():
     start_time = time.time()
-    find_threshold(run_rouge, run_rouge)
-    # evaluate_all()
+    DATA_PATH = '../../../output/PMCOA_out.json'
+    find_threshold(DATA_PATH, run_rouge)
+    # evaluate_all(DATA_PATH)
     print("Finished in {} seconds".format(time.time() - start_time))
 
 
