@@ -69,7 +69,7 @@ def run_pm25(data_path):
 
 def main():
     start_time = time.time()
-    DATA_PATH = '../../output/PMCOA_out.json'
+    DATA_PATH = '../../../output/PMCOA_out.json'
     run_pm25(DATA_PATH)
     print("Finished in {} seconds".format(time.time() - start_time))
 

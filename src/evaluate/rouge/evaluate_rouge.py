@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 def run_rouge(data_path, threshold=0):
-    rouge = evaluate.load('rouge')
+    rouge = evaluate.load('')
     total = 0
     correct = [0, 0, 0, 0]
 
@@ -73,7 +73,7 @@ def visualize(x, y1, y2):
 
 
 def evaluate_all():
-    DATA_PATH = '../../output/PMCOA_out.json'
+    DATA_PATH = '../../../output/PMCOA_out.json'
     total, precision = run_rouge(DATA_PATH)
 
     print('Total number of samples: {}'.format(total))
@@ -84,8 +84,8 @@ def evaluate_all():
 
 
 def find_threshold():
-    DATA_PATH_TRAIN = '../../output/PMCOA_out_train.json'
-    DATA_PATH_TEST = '../../output/PMCOA_out_test.json'
+    DATA_PATH_TRAIN = '../../../output/PMCOA_out_train.json'
+    DATA_PATH_TEST = '../../../output/PMCOA_out_test.json'
 
     thresholds = np.linspace(0, 1, 11)
     precision_train = []

@@ -3,8 +3,8 @@ import json
 from src.utils.metrics_NDCG import similarities_to_ndcg
 
 
-DATA_PATH = '../../output/PMCOA_out.json'
-rouge = evaluate.load('rouge')
+DATA_PATH = '../../../output/PMCOA_out.json'
+rouge = evaluate.load('')
 
 
 total = 0

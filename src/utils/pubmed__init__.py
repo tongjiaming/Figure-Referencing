@@ -1,5 +1,5 @@
 """
-Overwrite this to .venv/Lib/site-packages/pubmed_parser/__init__.py
+Overwrite this to .venv/Lib/site-packages/pubmed_parser/_init__.py
 """
 # __version__ = "0.3.1"
 # from .pubmed_oa_parser import (

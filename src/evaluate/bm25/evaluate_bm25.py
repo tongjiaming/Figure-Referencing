@@ -42,7 +42,7 @@ def run_pm25(data_path, threshold=-1):
 
 
 def evaluate_all():
-    DATA_PATH = '../../output/PMCOA_out.json'
+    DATA_PATH = '../../../output/PMCOA_out.json'
     total, recall, precision = run_pm25(DATA_PATH)
 
     print('Total number of samples: {}'.format(total))
