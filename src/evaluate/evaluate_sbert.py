@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import time
 from numpy import dot
 from numpy.linalg import norm
-from evaluate_load_data import data_loader
+from src.utils.evaluate_load_data import data_loader
 
 
 def cosine_similarity(query, candidates):

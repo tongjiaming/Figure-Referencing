@@ -1,4 +1,4 @@
-from evaluate_load_data import data_loader
+from src.utils.evaluate_load_data import data_loader
 from rank_bm25 import BM25Okapi
 import time
 
