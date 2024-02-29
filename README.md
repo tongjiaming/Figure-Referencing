@@ -190,17 +190,6 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 }
 ```
 
-# 12, Feb, 2024
-- [x] index optimization
-- [x] fake referencing sentences
-- [x] NDCG for caption -> sentence
-- [x] sentence-bert embedding cosine-sim
-- [x] split into train validate test (manually)
-- [x] threshold score rather than top match
-find out the best threshold value
-- [ ] The entire dataset
-- [ ] play with GPT
-
 # Results
 ## Baseline: sentence -> caption
 | Approach  | Num of Samples |      Precision      |
@@ -233,19 +222,6 @@ find out the best threshold value
 |  TF-IDF   |     26046      |  0.255087153497658  |  1.0   |
 |   BM25    |     26046      | 0.20763264992705213 |  1.0   |
 
-
-# 22, Feb, 2024
-- [x] when finding fake refs, only take refs from sections have no ref.
-show some examples of the results
-- [x] Bm25 as new baseline (some negative scores)
-- [x] S2ORC
-- [ ] Precision and Recall (MultiClass)
-- [ ] galactica model
-- [ ] arxiv
-- [x] play with GPT
-- [x] publication year for the extracted data
-
-
 # 29, Feb, 2024
 - [x] Explore Arxiv, script for downloading 'tex.tar's of arxiv papers done.
   - 21 of 100 S2ORC papers can be found in arxiv
@@ -267,3 +243,25 @@ show some examples of the results
   - https://huggingface.co/facebook/galactica-6.7b/raw/main/tokenizer.json
 - [x] Month information ()
 - [ ] Entire dataset
+
+# 22, Feb, 2024
+- [x] when finding fake refs, only take refs from sections have no ref.
+show some examples of the results
+- [x] Bm25 as new baseline (some negative scores)
+- [x] S2ORC
+- [ ] Precision and Recall (MultiClass)
+- [ ] galactica model
+- [ ] arxiv
+- [x] play with GPT
+- [x] publication year for the extracted data
+- 
+# 12, Feb, 2024
+- [x] index optimization
+- [x] fake referencing sentences
+- [x] NDCG for caption -> sentence
+- [x] sentence-bert embedding cosine-sim
+- [x] split into train validate test (manually)
+- [x] threshold score rather than top match
+find out the best threshold value
+- [ ] The entire dataset
+- [ ] play with GPT
