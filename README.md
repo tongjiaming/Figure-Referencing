@@ -248,8 +248,23 @@ show some examples of the results
 
 # 22, Feb, 2024
 - [x] Explore Arxiv, script for downloading 'tex.tar's of arxiv papers done.
-- [x] Month information
-- [x] Month information
+  - 21 of 100 S2ORC papers can be found in arxiv
+  - Can use freely, not sure for a huge data
+  - https://aws.amazon.com/cn/s3/pricing/ 0.02695 USD / GB
+- [x] Explore the threshold thing
+  - Experiments on bm25, rouge and tf-idf
+  - Line charts and results uploaded to google drive
+- [x] Code refactored, data_loader bug fixing, better normalized method for bm25 and etc
+- [x] Explore on GPT
+  - ChatGPT and GPT api should be different
+  - My credit card is refused
+- [x] Explore Galactica
+  - Basic codes are done
+  - Training papers are up to July 2022 (But training dataset not only papers)
+  - Interesting special tokens used
+  - https://huggingface.co/facebook/galactica-6.7b/raw/main/tokenizer.json
+- [x] Month information ()
+- [ ] Entire dataset
 
 
 
