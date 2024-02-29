@@ -3,7 +3,7 @@ This repo is for the master thesis of figure referencing.
 
 # How to Use
 ## Make sure the pubmed_parser works
-Replace `.venv/Lib/site-packages/pubmed_parser/__init__.py` with `src/load_data/pubmed__init__.py` before using.
+Replace `.venv/Lib/site-packages/pubmed_parser/__init__.py` with `src/utils/pubmed__init__.py` before using.
 
 After replacing, change filename of `pubmed__init__.py` to `__init__.py` and uncomment the content.
 
@@ -248,3 +248,5 @@ show some examples of the results
 
 
 
+Fixed a bug may cause the referencing sentence not complete, Modules using data_loader will be affected and the results should be updated.
+Uses a more sensible way to normalize the scores of bm25

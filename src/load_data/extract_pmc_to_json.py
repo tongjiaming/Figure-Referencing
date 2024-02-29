@@ -3,11 +3,6 @@ from src.utils import lib_pubmed_oa_parser2 as pp2
 import json
 import os
 
-DATA_PATH = '../../data/pmc/'
-TEST_DATA_PATH = '../../data/pmc/PMC516027.xml'
-OUTPUT_PATH = '../../output/PMCOA_out.json'
-TEST_OUTPUT_PATH = '../../output/PMCOA_extract_test.json'
-
 
 def process_paper(path, paper_id):
     paper_URL = ""
@@ -19,7 +14,7 @@ def process_paper(path, paper_id):
     paper_day, paper_month, paper_year = dict_out["publication_date"].split('-')
 
     paragraphs, sentences, references, referenced_items = (
-        pp2.parse_pubmed_paragraph3(path, paper_id, with_fake_refs=True))
+        pp2.parse_pubmed_paragraph3(path, paper_id, with_fake_refs=True, fake_refs_ratio=0.5))
 
     out_figure = pp2.parse_pubmed_caption2(path)
     out_table = pp2.parse_pubmed_table2(path)
@@ -55,6 +50,9 @@ def process_paper(path, paper_id):
 
 
 def my_test():
+    TEST_DATA_PATH = '../../data/pmc/PMC516027.xml'
+    TEST_OUTPUT_PATH = '../../output/PMCOA_extract_test.json'
+
     data_sample = process_paper(TEST_DATA_PATH, 0)
     print('Extracting from ' + TEST_DATA_PATH)
     with open(TEST_OUTPUT_PATH, 'w') as file:  # clear old content
@@ -62,6 +60,9 @@ def my_test():
 
 
 def main():
+    DATA_PATH = '../../data/pmc/'
+    OUTPUT_PATH = '../../output/PMCOA_out.json'
+
     with open(OUTPUT_PATH, 'w') as file:  # clear old content
         file.write('')
 

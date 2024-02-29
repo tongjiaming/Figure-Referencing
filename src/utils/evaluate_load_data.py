@@ -27,7 +27,7 @@ def data_loader(data_path):
                 paragraph = data['paragraphs'][sentence['paragraph']]
                 sentence_text = paragraph['text'][sentence['start']:sentence['end']]
 
-                query = sentence_text[:start] + '<ref>' + sentence_text[:end]
+                query = sentence_text[:start] + '<ref>' + sentence_text[end:]
                 queries.append(query)
 
                 target = reference['target']

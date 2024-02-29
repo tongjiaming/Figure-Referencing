@@ -1,12 +1,11 @@
 import evaluate
 from src.utils.evaluate_load_data import data_loader
+from src.utils.find_threshold import find_threshold
 import time
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 def run_rouge(data_path, threshold=0):
-    rouge = evaluate.load('')
+    rouge = evaluate.load('rouge')
     total = 0
     correct = [0, 0, 0, 0]
 
@@ -61,17 +60,6 @@ def run_rouge(data_path, threshold=0):
     return total, precision
 
 
-def visualize(x, y1, y2):
-    plt.plot(x, y1, color='blue', label='Train')
-    plt.plot(x, y2, color='red', label='Test')
-
-    plt.title('Rouge2')
-    plt.xlabel('Threshold')
-    plt.ylabel('Precision')
-
-    plt.show()
-
-
 def evaluate_all():
     DATA_PATH = '../../../output/PMCOA_out.json'
     total, precision = run_rouge(DATA_PATH)
@@ -83,24 +71,9 @@ def evaluate_all():
     print('Precision Using rougeLsum: {}'.format(precision[3]))
 
 
-def find_threshold():
-    DATA_PATH_TRAIN = '../../../output/PMCOA_out_train.json'
-    DATA_PATH_TEST = '../../../output/PMCOA_out_test.json'
-
-    thresholds = np.linspace(0, 1, 11)
-    precision_train = []
-    precision_test = []
-
-    for threshold in thresholds:
-        precision_train.append(run_rouge(DATA_PATH_TRAIN, threshold=threshold)[1][1])
-        precision_test.append(run_rouge(DATA_PATH_TEST, threshold=threshold)[1][1])
-
-    visualize(thresholds, precision_train, precision_test)
-
-
 def main():
     start_time = time.time()
-    find_threshold()
+    find_threshold(run_rouge)
     print("Finished in {} seconds".format(time.time() - start_time))
 
 
