@@ -1,65 +1,88 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from src.utils.evaluate_load_data import data_loader
+from src.utils.find_threshold import find_threshold
 import json
+import time
 
 
-DATA_PATH = '../../../output/PMCOA_out.json'
+def run_tf_idf(data_path, threshold=0):
+    total = 0
+    tp = 0
+    fp = 0
+    tn = 0
+    fn = 0
 
-total = 0
-correct = 0
+    log_path = '../../../logs/PMCOA_tf_idf_threshold={}.json'.format(threshold)
 
-with open(DATA_PATH) as file:
-    for line in file:
-        data = json.loads(line)
+    with open(log_path, 'w') as file:
+        file.write('')
 
-        if len(data['referenced_items']) <= 1:
-            continue
+    loader = data_loader(data_path)
+    while True:
+        try:
+            queries, targets, candidates, candidate_labels = next(loader)
+            all_texts = queries + candidates
 
-        queries = []
-        gts = []
-        for reference in data['references']:
-            sentence_id = reference['sentence']
-            start = reference['start']
-            end = reference['end']
+            tfidf_vectorizer = TfidfVectorizer()
+            tfidf_matrix = tfidf_vectorizer.fit_transform(all_texts)
 
-            for sentence in data['sentences']:
-                if sentence_id == sentence['id']:
-                    for paragraph in data['paragraphs']:
-                        if paragraph['id'] == sentence['paragraph']:
-                            sentence_text = paragraph['text'][sentence['start']:sentence['end']]
-                            break
-                    break
-            query = sentence_text[:start] + '<ref>' + sentence_text[:end]
-            queries.append(query)
+            for query, target in zip(queries, targets):
+                total = total + 1
+                print('Working on sample {}'.format(total))
 
-            gt = reference['target']
-            gts.append(gt)
+                query_tfidf = tfidf_vectorizer.transform([query])
+                similarities = cosine_similarity(query_tfidf, tfidf_matrix[len(queries):])
 
-        candidates = []
-        candidate_labels = []
-        for candidate in data['referenced_items']:
-            candidates.append(candidate['caption'])
-            candidate_labels.append(candidate['id'])
+                if max(similarities[0]) < threshold:
+                    prediction = "None"
+                    tn = tn + (target == prediction)
+                    fn = fn + (target != "None")
+                else:
+                    closest_caption_index = similarities.argmax()
+                    prediction = candidate_labels[closest_caption_index]
+                    tp = tp + (target == prediction)
+                    fp = fp + (target != prediction)
 
-        all_texts = queries + candidates
+                log = {
+                    "query": query,
+                    "target": target,
+                    "candidates": candidates,
+                    "scores": list(similarities[0]),
+                    "threshold": threshold,
+                    "prediction": prediction
+                }
+                with open(log_path, 'a') as file:
+                    json.dump(log, file)
+                    file.write('\n')
 
-        tfidf_vectorizer = TfidfVectorizer()
-        tfidf_matrix = tfidf_vectorizer.fit_transform(all_texts)
+        except StopIteration:
+            break
 
-        for query, gt in zip(queries, gts):
-            total = total + 1
-            print('Working on sample {}'.format(total))
+    precision = tp / max(1, (tp + fp))
+    recall = tp / max(1, (tp + fn))
+    return total, recall, precision
 
-            # if total == 53:
-            #     pass
 
-            query_tfidf = tfidf_vectorizer.transform([query])
-            similarities = cosine_similarity(query_tfidf, tfidf_matrix[len(queries):])
-            closest_caption_index = similarities.argmax()
+def evaluate_all(data_path, threshold=0):
+    total, recall, precision = run_tf_idf(data_path, threshold)
 
-            prediction = candidate_labels[closest_caption_index]
+    print('Total number of samples: {}'.format(total))
+    print('Precision Using TF_IDF: {}'.format(precision))
+    print('Recall Using TF_IDF: {}'.format(recall))
+    print('==========================================')
 
-            correct = correct + (gt == prediction)
+    return total, recall, precision
 
-print('Total number of samples: {}'. format(total))
-print('Precision Using TF-IDF: {}'.format(correct / total))
+
+def main():
+    start_time = time.time()
+
+    DATA_PATH = '../../../output/PMCOA_out.json'
+    evaluate_all(DATA_PATH)
+    # find_threshold(DATA_PATH, evaluate_all)
+    print("Finished in {} seconds".format(time.time() - start_time))
+
+
+if __name__ == "__main__":
+    main()

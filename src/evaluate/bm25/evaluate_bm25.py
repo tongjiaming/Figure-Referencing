@@ -12,8 +12,7 @@ def run_pm25(data_path, threshold=0):
     tn = 0
     fn = 0
 
-    # log_path = '../../../logs/PMCOA_bm25_threshold={}.json'.format(threshold)
-    log_path = 'PMCOA_bm25.json'.format(threshold)
+    log_path = '../../../logs/PMCOA_bm25_threshold={}.json'.format(threshold)
 
     with open(log_path, 'w') as file:
         file.write('')
@@ -27,7 +26,7 @@ def run_pm25(data_path, threshold=0):
 
             for query, target in zip(queries, targets):
                 total = total + 1
-                # print('Working on sample {}'.format(total))
+                print('Working on sample {}'.format(total))
                 scores = bm25.get_scores(query.split(' '))
                 scores = list(scores)
                 normalized_scores = [max(0, x) for x in scores]
