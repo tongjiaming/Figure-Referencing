@@ -246,7 +246,7 @@ show some examples of the results
 - [x] publication year for the extracted data
 
 
-# 22, Feb, 2024
+# 29, Feb, 2024
 - [x] Explore Arxiv, script for downloading 'tex.tar's of arxiv papers done.
   - 21 of 100 S2ORC papers can be found in arxiv
   - Can use freely, not sure for a huge data
@@ -255,6 +255,8 @@ show some examples of the results
   - Experiments on bm25, rouge and tf-idf
   - Line charts and results uploaded to google drive
 - [x] Code refactored, data_loader bug fixing, better normalized method for bm25 and etc
+  - Dataloader, wrong position of ':' causing the referencing sentence is not complete but the results change slightly
+  - The old normalize method for bm25 is not good, used a different method for that
 - [x] Explore on GPT
   - ChatGPT and GPT api should be different
   - My credit card is refused
@@ -265,8 +267,3 @@ show some examples of the results
   - https://huggingface.co/facebook/galactica-6.7b/raw/main/tokenizer.json
 - [x] Month information ()
 - [ ] Entire dataset
-
-
-
-Fixed a bug may cause the referencing sentence not complete, Modules using data_loader will be affected and the results should be updated.
-Uses a more sensible way to normalize the scores of bm25
