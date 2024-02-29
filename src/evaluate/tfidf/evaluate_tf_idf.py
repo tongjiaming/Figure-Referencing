@@ -79,8 +79,8 @@ def main():
     start_time = time.time()
 
     DATA_PATH = '../../../output/PMCOA_out.json'
-    evaluate_all(DATA_PATH)
-    # find_threshold(DATA_PATH, evaluate_all)
+    # evaluate_all(DATA_PATH)
+    find_threshold(DATA_PATH, evaluate_all)
     print("Finished in {} seconds".format(time.time() - start_time))
 
 

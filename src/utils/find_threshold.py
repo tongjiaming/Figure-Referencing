@@ -22,6 +22,13 @@ def find_threshold(data_path, evaluate_fun, num_thresholds=11):
     for threshold in thresholds:
         print('Working on threshold {}.'.format(threshold))
         _, precision, recall = evaluate_fun(data_path, threshold=threshold)
+
+        # For rouge only, choose rouge2
+        if isinstance(precision, list):
+            precision = precision[1]
+        if isinstance(recall, list):
+            recall = recall[1]
+
         precisions.append(precision)
         recalls.append(recall)
 
