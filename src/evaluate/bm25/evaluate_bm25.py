@@ -12,10 +12,9 @@ def run_pm25(data_path, threshold=0):
     tn = 0
     fn = 0
 
-    log_path = '../../../logs/PMCOA_bm25_threshold={}.json'.format(threshold)
-
-    with open(log_path, 'w') as file:
-        file.write('')
+    # log_path = '../../../logs/PMCOA_bm25_threshold={}.json'.format(threshold)
+    # with open(log_path, 'w') as file:
+    #     file.write('')
 
     loader = data_loader(data_path)
     while True:
@@ -41,25 +40,25 @@ def run_pm25(data_path, threshold=0):
                     tp = tp + (target == prediction)
                     fp = fp + (target != prediction)
 
-                log = {
-                    "query": query,
-                    "target": target,
-                    "candidates": candidates,
-                    "scores": scores,
-                    "normalized_scores": normalized_scores,
-                    "threshold": threshold,
-                    "prediction": prediction
-                }
-                with open(log_path, 'a') as file:
-                    json.dump(log, file)
-                    file.write('\n')
+                # log = {
+                #     "query": query,
+                #     "target": target,
+                #     "candidates": candidates,
+                #     "scores": scores,
+                #     "normalized_scores": normalized_scores,
+                #     "threshold": threshold,
+                #     "prediction": prediction
+                # }
+                # with open(log_path, 'a') as file:
+                #     json.dump(log, file)
+                #     file.write('\n')
 
         except StopIteration:
             break
 
     precision = tp / max(1, (tp + fp))
     recall = tp / max(1, (tp + fn))
-    return total, recall, precision
+    return total, precision, recall
 
 
 def evaluate_all(data_path, threshold=0):
@@ -70,7 +69,7 @@ def evaluate_all(data_path, threshold=0):
     print('Recall Using Bm25: {}'.format(recall))
     print('==========================================')
 
-    return total, recall, precision
+    return total, precision, recall
 
 
 def main():

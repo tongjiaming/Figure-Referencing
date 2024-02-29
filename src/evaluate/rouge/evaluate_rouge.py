@@ -13,10 +13,9 @@ def run_rouge(data_path, threshold=0):
     tn = [0, 0, 0, 0]
     fn = [0, 0, 0, 0]
 
-    log_path = '../../../logs/PMCOA_rouge_threshold={}.json'.format(threshold)
-
-    with open(log_path, 'w') as file:
-        file.write('')
+    # log_path = '../../../logs/PMCOA_rouge_threshold={}.json'.format(threshold)
+    # with open(log_path, 'w') as file:
+    #     file.write('')
 
     loader = data_loader(data_path)
     while True:
@@ -48,20 +47,20 @@ def run_rouge(data_path, threshold=0):
                         tp[idx] = tp[idx] + (target == prediction)
                         fp[idx] = fp[idx] + (target != prediction)
 
-                log = {
-                    "query": query,
-                    "target": target,
-                    "candidates": candidates,
-                    "rouge1": rouge1,
-                    "rouge2": rouge2,
-                    "rougeL": rougeL,
-                    "rougeLsum": rougeLsum,
-                    "threshold": threshold,
-                    "prediction": prediction
-                }
-                with open(log_path, 'a') as file:
-                    json.dump(log, file)
-                    file.write('\n')
+                # log = {
+                #     "query": query,
+                #     "target": target,
+                #     "candidates": candidates,
+                #     "rouge1": rouge1,
+                #     "rouge2": rouge2,
+                #     "rougeL": rougeL,
+                #     "rougeLsum": rougeLsum,
+                #     "threshold": threshold,
+                #     "prediction": prediction
+                # }
+                # with open(log_path, 'a') as file:
+                #     json.dump(log, file)
+                #     file.write('\n')
 
         except StopIteration:
             break
