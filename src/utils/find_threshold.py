@@ -14,7 +14,6 @@ def visualize(x, y1, y2, title='', x_label='', y_label='', y1_label='', y2_label
     plt.show()
 
 
-
 def find_threshold(data_path, evaluate_fun, num_thresholds=11):
     # try different threshold and draw a line chart
     thresholds = np.linspace(0, 1, num_thresholds)
