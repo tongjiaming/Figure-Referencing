@@ -3,6 +3,7 @@ import urllib, urllib.request
 import xmltodict
 import requests
 import os
+import time
 
 
 def encode_query(title):
@@ -16,6 +17,7 @@ def encode_query(title):
 
 
 def download_and_save(url, folder_path):
+    time.sleep(2)
     response = requests.get(url)
 
     if response.status_code == 200:

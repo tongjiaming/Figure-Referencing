@@ -50,7 +50,7 @@ def process_paper(path, paper_id):
 
 
 def my_test():
-    TEST_DATA_PATH = '../../data/pmc/PMC516027.xml'
+    TEST_DATA_PATH = '../../data/pmc/PMC176545.xml'
     TEST_OUTPUT_PATH = '../../output/PMCOA_extract_test.json'
 
     data_sample = process_paper(TEST_DATA_PATH, 0)
@@ -79,5 +79,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # my_test()
-    main()
+    my_test()
+    # main()

@@ -133,7 +133,7 @@ def main():
     META_DICT_PATH = '../../output/S2ORC/meta_dict.json'
 
     # extract_s2orc_meta(META_DATA_PATH, META_DICT_PATH)
-    extract_s2orc(DATA_PATH, OUT_DATA_PATH, META_DICT_PATH, n=100)
+    extract_s2orc(DATA_PATH, OUT_DATA_PATH, META_DICT_PATH, n=1000)
 
 
 if __name__ == "__main__":

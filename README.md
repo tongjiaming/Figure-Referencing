@@ -222,6 +222,38 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 |  TF-IDF   |     26046      |  0.255087153497658  |  1.0   |
 |   BM25    |     26046      | 0.20763264992705213 |  1.0   |
 
+# 7, March, 2024
+- [x] GPT a few samples
+  - Using GPT4
+  - A prompt generator
+  - Test 15 samples
+  - 13 of 15 is correct
+  - 1 is wrong but second answer is correct
+  - 1 is completely wrong
+  - Start a conversation for each test to avoid memory
+- [x] Galactica
+  - conditional likelihood
+  - results look bad
+  - GPU not enough
+- [x] The entire dataset
+  - For PMCOA only
+  - Code for decompress
+  - Code done, running on Zulaut
+  - Question about shuffling
+- [x] Arxiv
+  - 73 downloadable folders from 1000 s2orc papers’ title
+  - In total, these are the latex project folder for their papers.
+  - Some are simple, one tex file and the rest are figures
+  - The figures/tables have different file format including ‘ps, eps, png, pdf’ or mix of them
+  - Some paper has more than one tex file(appendix, intro, macros …)
+  - Some only contains one file like 1506.06367v1, the size is 0kb
+  - For some paper, figures are in a separate folder
+- Some includes csv, probably for tables/histograms
+- [x] BM25
+  - Tokenizer looks problematic
+  - "this first sentence has six words" -> [first, sentence, ha, six, words]
+  - Also implemented my own bm25
+
 # 29, Feb, 2024
 - [x] Explore Arxiv, script for downloading 'tex.tar's of arxiv papers done.
   - 21 of 100 S2ORC papers can be found in arxiv
@@ -265,3 +297,4 @@ show some examples of the results
 find out the best threshold value
 - [ ] The entire dataset
 - [ ] play with GPT
+
