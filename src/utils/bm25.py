@@ -3,7 +3,6 @@ from functools import lru_cache
 from nltk.tokenize import RegexpTokenizer
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-from tqdm import tqdm
 
 from collections import Counter, defaultdict
 import json
@@ -50,14 +49,14 @@ class BM25Ranker:
 
         # tokenize documents
         token_counter_per_doc = [
-            Counter(self.tokenizer.tokenize(_)) for _ in tqdm(docs)
+            Counter(self.tokenizer.tokenize(_)) for _ in docs
         ]
         doc_lengths = np.array([sum(_.values()) for _ in token_counter_per_doc])
         avg_doc_length = np.mean(doc_lengths)
 
         # determine number of times each token appears in each doc
         token2sparse_doc_freqs = defaultdict(list)
-        for doc_idx, token_counter in tqdm(enumerate(token_counter_per_doc)):
+        for doc_idx, token_counter in enumerate(token_counter_per_doc):
             for token, count in token_counter.items():
                 token2sparse_doc_freqs[token].append((doc_idx, count))
 
@@ -129,20 +128,58 @@ class BM25Ranker:
         )
 
 
-if __name__ == '__main__':
-    docs = [
-        "this first sentence has six words",
-        "this second sentence has six words",
-        "first sentence"
-    ]
+def bm25_by_paper(queries, targets, candidates, candidate_labels, threshold=0):
+    total = 0
+    tp = 0
+    fp = 0
+    tn = 0
+    fn = 0
 
     tokenizer = Tokenizer()
     bm25 = BM25Ranker(tokenizer)
-    bm25.initialize(docs)
+    bm25.initialize(candidates)
 
-    text = docs[2]
-    print(text)
-    print()
+    for query, target in zip(queries, targets):
+        total = total + 1
+        scores = bm25.get_scores(query)
 
-    scores = bm25.get_scores(text)
-    print(scores)
+        try:
+            scores = list(scores)
+        except Exception:
+            scores = [0] * len(candidates)
+
+        if max(scores) < threshold:
+            prediction = "None"
+            tn = tn + (target == prediction)
+            fn = fn + (target != "None")
+        else:
+            prediction = candidate_labels[scores.index(max(scores))]
+            tp = tp + (target == prediction)
+            fp = fp + (target != prediction)
+
+    return total, tp, fp, tn, fn
+
+
+def my_test():
+    from utils.evaluate_load_data import data_loader
+    data_path = '../../output/PMCOA_out.json'
+    loader = data_loader(data_path)
+    total_acc = 0
+    tp_acc = 0
+    while True:
+        try:
+            queries, targets, candidates, candidate_labels = next(loader)
+            res = bm25_by_paper(queries, targets, candidates, candidate_labels)
+            total_acc += res[0]
+            tp_acc += res[1]
+
+        except Exception as e:
+            print(e)
+            break
+
+    print(total_acc)
+    print(tp_acc)
+
+
+if __name__ == '__main__':
+    my_test()

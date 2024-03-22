@@ -16,6 +16,7 @@ def data_loader(data_path):
             candidate_labels = []
 
             if len(data['referenced_items']) <= 1:
+                yield 0
                 continue
 
             for reference in data['references']:
