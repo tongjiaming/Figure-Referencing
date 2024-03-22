@@ -222,6 +222,18 @@ The `start` and `end` in `sentences` indicate the index of the paragraph.
 |  TF-IDF   |     26046      |  0.255087153497658  |  1.0   |
 |   BM25    |     26046      | 0.20763264992705213 |  1.0   |
 
+# 14, March, 2024
+- [x] Slides for presentation
+- [x] LLM(Gal + Specter)
+  - For Gal: At the beginning works, then Exception: CUDA error: unspecified launch failure
+  - For Specter
+- [x] The whole dataset
+  - PMCOA may be still loading
+  - S2ORC, only have a small subset
+- [ ] BM25 results
+  - Still waiting for the whole dataset done
+- [ ] Arxiv Parser / IBM deep searching
+
 # 7, March, 2024
 - [x] GPT a few samples
   - Using GPT4
