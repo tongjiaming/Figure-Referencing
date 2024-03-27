@@ -1,30 +1,37 @@
 import json
+import os
 from sentence_splitter import split_text_into_sentences
+from src.utils.utils import config_log
+from src.utils.decorater import execution_time
+from multiprocessing import Pool
+from tqdm import tqdm
 
 
-def extract_s2orc_meta(meta_data_path, output_path):
-    meta_dict = dict()
-    with (open(meta_data_path) as file, open(output_path, 'w') as file2):
-        for line in file:
-            data_object = json.loads(line)
-            meta_dict[data_object['paper_id']] = {
-                'year': data_object['year'],
-                'title': data_object['title']
-            }
+def extract_s2orc_meta(meta_data_path, meta_dict_path):
+    if not os.path.exists(meta_dict_path):
+        meta_dict = dict()
+        with open(meta_data_path) as file, open(meta_dict_path, 'w') as file2:
+            for line in file:
+                data_object = json.loads(line)
+                meta_dict[data_object['paper_id']] = {
+                    'year': data_object['year'],
+                    'title': data_object['title']
+                }
 
-        file2.write(json.dumps(meta_dict) + '\n')
+            file2.write(json.dumps(meta_dict) + '\n')
 
 
-def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
+def extract_s2orc(data_path, meta_dict_path, idx):
+    data_samples = []
+
     with open(meta_dict_path) as file:
         line = file.readline()
         meta_dict = json.loads(line)
 
-    with open(data_path) as file, open(out_path, 'w') as file2:
+    with open(data_path) as file:
         paper_id = 0
-        while paper_id != n:
-            print('Extracting paper {}'.format(paper_id))
-            line = file.readline()
+        print(paper_id)
+        for line in file:
             json_object = json.loads(line)
             if not json_object['ref_entries']:
                 continue
@@ -33,6 +40,7 @@ def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
             for body_text in json_object['body_text']:
                 if body_text['ref_spans']:
                     with_ref = True
+                    break
             if not with_ref:
                 continue
 
@@ -40,6 +48,7 @@ def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
             pmcid = ''
             s2orcid = json_object['paper_id']
 
+            abstract = ''
             if json_object['abstract']:
                 abstract = json_object['abstract'][0]['text']
 
@@ -80,7 +89,7 @@ def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
                             reference = dict()
                             for sentence in paragraph_sentences:
                                 if sentence['start'] < span['start'] < sentence['end']:
-                                    reference['reference_id'] = 'S2ORC' + str(local_reference_id + 1000 * paper_id)
+                                    reference['reference_id'] = 'S2ORC_{}_{}_{}'.format(idx, paper_id, local_reference_id)
                                     reference['sentence'] = sentence['id']
                                     reference['start'] = span['start'] - sentence['start']
                                     reference['end'] = span['end'] - sentence['start']
@@ -107,7 +116,7 @@ def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
                     sentences = sentences + paragraph_sentences
 
             data_sample = {
-                "paper_id": paper_id,
+                "paper_id": '{}_{}'.format(idx, paper_id),
                 "paper_URL": paper_URL,
                 "paper_PMCID": pmcid,
                 "paper_s2orc_id": s2orcid,
@@ -122,19 +131,43 @@ def extract_s2orc(data_path, out_path, meta_dict_path, n=-1):
                 "referenced_items": list(referenced_items.values())
             }
 
-            file2.write(json.dumps(data_sample) + '\n')
             paper_id = paper_id + 1
+            data_samples.append(data_sample)
+            print(len(data_samples))
+
+    return data_samples
 
 
+def process_s2orc(idx):
+    data_path = DATA_PATH.format(idx)
+    meta_data_path = META_DATA_PATH.format(idx)
+    meta_dict_path = META_DICT_PATH.format(idx)
+
+    extract_s2orc_meta(meta_data_path, meta_dict_path)
+    return extract_s2orc(data_path, meta_dict_path, idx)
+
+
+@execution_time
 def main():
-    DATA_PATH = '../../data/S2ORC/pdf_parses_0.jsonl'
-    OUT_DATA_PATH = '../../output/S2ORC/s2orc_out.json'
-    META_DATA_PATH = '../../data/S2ORC/metadata_0.jsonl'
-    META_DICT_PATH = '../../output/S2ORC/meta_dict.json'
+    decision = input("The old output {} will be deleted, continue? (y/n): ".format(OUT_DATA_PATH))
+    if decision.lower() != 'y':
+        return 0
 
-    # extract_s2orc_meta(META_DATA_PATH, META_DICT_PATH)
-    extract_s2orc(DATA_PATH, OUT_DATA_PATH, META_DICT_PATH, n=1000)
+    # config_log('s2orc')
+
+    with open(OUT_DATA_PATH, 'w') as file:
+        with Pool(2) as pool:
+            res = tqdm(pool.imap_unordered(func=process_s2orc, iterable=range(0, NUM_S2ORC)), total=NUM_S2ORC)
+            for data_samples in res:
+                for data_sample in data_samples:
+                    if data_sample is not None:
+                        json.dump(data_sample, file)
+                        file.write('\n')
 
 
-if __name__ == "__main__":
-    main()
+DATA_PATH = '../../data/S2ORC/pdf_parses_{}.jsonl'
+META_DATA_PATH = '../../data/S2ORC/metadata_{}.jsonl'
+META_DICT_PATH = 'meta_dict_{}.json'
+OUT_DATA_PATH = 's2orc.jsonl'
+NUM_S2ORC = 1
+main()
