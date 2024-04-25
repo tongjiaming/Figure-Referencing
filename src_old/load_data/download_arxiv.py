@@ -44,7 +44,7 @@ def main():
             response_dict = xmltodict.parse(data.read().decode('utf-8'))
             if 'entry' in response_dict['feed'] and not isinstance(response_dict['feed']['entry'], list):
                 print('Downloading {}.'.format(json_obj['paper_title']))
-                download_url = response_dict['feed']['entry']['id'].replace('abs', 'src')
+                download_url = response_dict['feed']['entry']['id'].replace('abs', 'src_old')
                 download_and_save(download_url, ARXIV_SAVE_PATH)
 
 

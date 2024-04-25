@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import json
-from src.utils.metrics_NDCG import similarities_to_ndcg
+from src_old.utils.metrics_NDCG import similarities_to_ndcg
 
 
 DATA_PATH = '../../../output/PMCOA_out.json'

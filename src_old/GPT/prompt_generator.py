@@ -1,4 +1,4 @@
-from src.utils.evaluate_load_data import data_loader
+from src_old.utils.evaluate_load_data import data_loader
 
 
 def prompt_generator(data_path):

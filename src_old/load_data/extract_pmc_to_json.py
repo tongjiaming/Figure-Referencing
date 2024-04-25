@@ -1,5 +1,5 @@
 import pubmed_parser as pp
-from src.utils import lib_pubmed_oa_parser2 as pp2
+from src_old.utils import lib_pubmed_oa_parser2 as pp2
 import json
 import os
 

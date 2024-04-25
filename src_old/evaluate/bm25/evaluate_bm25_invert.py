@@ -1,6 +1,6 @@
 import time
 import json
-from src.utils.metrics_NDCG import similarities_to_ndcg
+from src_old.utils.metrics_NDCG import similarities_to_ndcg
 from rank_bm25 import BM25Okapi
 
 

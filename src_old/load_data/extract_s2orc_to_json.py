@@ -1,8 +1,8 @@
 import json
 import os
 from sentence_splitter import split_text_into_sentences
-from src.utils.utils import config_log
-from src.utils.decorater import execution_time
+from src_old.utils.utils import config_log
+from src_old.utils.decorater import execution_time
 from multiprocessing import Pool
 from tqdm import tqdm
 

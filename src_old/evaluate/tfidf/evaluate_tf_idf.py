@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from src.utils.evaluate_load_data import data_loader
-from src.utils.find_threshold import find_threshold
+from src_old.utils.evaluate_load_data import data_loader
+from src_old.utils.find_threshold import find_threshold
 import json
 import time
 
